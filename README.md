@@ -31,3 +31,5 @@ To delete an unused dependency use the `yarn remove` command:
 
 
 The dependencies installed by Yarn can be used in Sprockets as long as they work exporting browser globals (most of the dependencies for browsers do this already), if you want to use CommonJS/AMD dependencies you need to have a CommonJS/AMD environment for Sprockets or a bundler like Webpack or Browserify.
+
+For more info about Yarn read the [Getting Started](https://yarnpkg.com/en/docs/getting-started) guide.
