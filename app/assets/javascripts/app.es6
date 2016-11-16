@@ -27,4 +27,7 @@ angular.module('todomvc', ['ngRoute', 'ngResource'])
         .otherwise({
             redirectTo: '/'
         });
+})
+    .config($httpProvider => {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
 });
