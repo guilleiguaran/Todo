@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', path: "/Users/Lilo/Desktop/rails"
+gem 'rails', github: "Liceth/rails"
 
 gem 'sprockets', github: 'rails/sprockets'
 gem 'babel-rails'
