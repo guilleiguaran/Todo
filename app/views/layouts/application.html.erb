@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo</title>
+    <meta charset="utf-8">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application' %>
+    <style>[ng-cloak] { display: none; }</style>
+  </head>
+  <body ng-app="todomvc">
+    <%= yield %>
+    <%= javascript_include_tag 'application' %>
+  </body>
+</html>
