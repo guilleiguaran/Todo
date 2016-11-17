@@ -33,3 +33,15 @@ To delete an unused dependency use the `yarn remove` command:
 The dependencies installed by Yarn can be used in Sprockets as long as they work exporting browser globals (most of the dependencies for browsers do this already), if you want to use CommonJS/AMD dependencies you need to have a CommonJS/AMD environment for Sprockets or a bundler like Webpack or Browserify.
 
 For more info about Yarn read the [Getting Started](https://yarnpkg.com/en/docs/getting-started) guide.
+
+
+
+## Babel
+
+Support for Babel is added with the babel-rails gem, underneath this just add the babel-transpiler gem as dependency to the project, set babel as default javascript engine and add generators for ES2015 (.es6 files). 
+
+Sprockets detects that babel-transpiler is included as dependency and register the Babel processor for .es6 files.
+
+By default Babel transpiles ES2015 modules to CommonJS modules hence you will need a CommonJS environment for Sprockets or a bundler like Webpack or Browserify if you want to use ES2015 modules.
+
+Check [Babel docs](http://babeljs.io/docs/learn-es2015/) to get more info about ES2015.
