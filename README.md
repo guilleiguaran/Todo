@@ -1,4 +1,4 @@
-# Yarn + ES6 demo
+# Yarn + Babel demo
 
 This app demostrate how to use Yarn as package manager for Rails assets and using ES6 as default javascript engine.
 
