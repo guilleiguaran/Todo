@@ -7,15 +7,14 @@
  * They both follow the same API, returning promises for all changes to the
  * model.
  */
-angular.module('todomvc')
-	.factory('todoStorage', ($http, $injector) => {
+const todoStorage = ($http, $injector) => {
     // Detect if an API backend is present. If so, return the API module, else
     // hand off the localStorage adapter
     return $http.get('/api')
         .then(() => $injector.get('api'), () => $injector.get('localStorage'));
-})
+}
 
-	.factory('api', $resource => {
+const api = $resource => {
     const store = {
         todos: [],
 
@@ -75,9 +74,9 @@ angular.module('todomvc')
     };
 
     return store;
-})
+}
 
-	.factory('localStorage', $q => {
+const localStorage = $q => {
     const STORAGE_ID = 'todos-angularjs';
 
     const store = {
@@ -148,4 +147,10 @@ angular.module('todomvc')
     };
 
     return store;
-});
+}
+
+module.exports = {
+  todoStorage: todoStorage,
+  api: api,
+  localStorage: localStorage
+}

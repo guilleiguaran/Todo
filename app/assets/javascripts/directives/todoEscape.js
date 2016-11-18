@@ -4,8 +4,7 @@
  * Directive that executes an expression when the element it is applied to gets
  * an `escape` keydown event.
  */
-angular.module('todomvc')
-	.directive('todoEscape', () => {
+ module.exports = () => {
     const ESCAPE_KEY = 27;
 
     return (scope, elem, attrs) => {
@@ -19,4 +18,4 @@ angular.module('todomvc')
             elem.unbind('keydown');
         });
     };
-});
+}

@@ -1,20 +1,43 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file. JavaScript code in this file should be added after the last require_* statement.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
-//= require jquery
-//= require angular
-//= require angular-route
-//= require angular-resource
-//= require app
-//= require_tree ./controllers
-//= require_tree ./services
-//= require_tree ./directives
+/**
+ * The main TodoMVC app module
+ *
+ * @type {angular.Module}
+ */
+
+window.$ = window.jQuery = require("jquery")
+
+const angular = require("angular")
+const ngRoute = require("angular-route")
+const ngResource = require("angular-resource")
+
+angular.module('todomvc', [ngRoute, ngResource])
+
+require('./controllers')
+require('./services')
+require('./directives')
+
+angular.module('todomvc')
+  .config($routeProvider => {
+    const routeConfig = {
+        controller: 'TodoCtrl',
+        templateUrl: 'todomvc-index.html',
+        resolve: {
+            store(todoStorage) {
+                // Get the correct module (API or localStorage).
+                return todoStorage.then(module => {
+                    module.get(); // Fetch the todo records in the background.
+                    return module;
+                });
+            }
+        }
+    };
+
+    $routeProvider
+        .when('/', routeConfig)
+        .when('/:status', routeConfig)
+        .otherwise({
+            redirectTo: '/'
+        });
+}).config($httpProvider => {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+});
