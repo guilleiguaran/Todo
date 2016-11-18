@@ -1,14 +1,28 @@
-# Be sure to restart your server when you modify this file.
+module WebpackAssetUrlHelper
+  def compute_asset_path(path, options = {})
+    if asset_path = manifest[path]
+      "/assets/" + asset_path
+    else
+      "/assets/" + path
+    end
+  end
 
-# Version of your assets, change this if you want to expire all your assets.
-# Rails.application.config.assets.version = '1.0'
+  private
 
-# Add additional assets to the asset load path
-# Rails.application.config.assets.paths << Emoji.images_path
-# Add Yarn node_modules folder to the asset load path.
-# Rails.application.config.assets.paths << Rails.root.join('node_modules')
+  def manifest
+    @manifest ||= read_manifest
+  end
 
-# Precompile additional assets.
-# application.js, application.css, and all non-JS/CSS in the app/assets
-# folder are already added.
-# Rails.application.config.assets.precompile += %w( admin.js admin.css )
+  def read_manifest
+    file = File.join(Rails.root, 'public', 'assets', 'manifest.json')
+    if File.exist?(file)
+      JSON.parse(File.read(file))
+    else
+      {}
+    end
+  end
+end
+
+ActiveSupport.on_load(:action_view) do
+  include WebpackAssetUrlHelper
+end
