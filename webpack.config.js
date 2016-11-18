@@ -45,7 +45,7 @@ module.exports = {
     loaders: [
       // JS + Babel
       {
-        test: /\.js$/,
+        test: /\.js(.erb)?$/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {
@@ -54,7 +54,7 @@ module.exports = {
       },
       // CoffeeScript
       {
-        test: /\.coffee$/,
+        test: /\.coffee(.erb)?$/,
         exclude: /node_modules/,
         loader: "coffee-loader"
       },
@@ -72,6 +72,13 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg|ttf|eot|woff2?)$/,
         loader: "file-loader?name=" + asset_output_template
+      }
+    ],
+    preLoaders: [
+      // erb
+      {
+        test: /\.erb$/,
+        loader: 'rails-erb-loader'
       }
     ]
   },

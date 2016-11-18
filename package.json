@@ -22,6 +22,7 @@
     "file-loader": "^0.9.0",
     "manifest-revision-webpack-plugin": "^0.3.0",
     "node-sass": "^3.13.0",
+    "rails-erb-loader": "guilleiguaran/rails-erb-loader#erubis",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
