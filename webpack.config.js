@@ -1,3 +1,12 @@
+if(process.argv[1].indexOf("webpack-dev-server") > -1) {
+  const spawn = require('child_process').spawn;
+  const rails = spawn('bin/rails', ['s']);
+
+  rails.stdout.on('data', (data) => {
+    process.stdout.write(data.toString());
+  });
+}
+
 const fs = require('fs');
 const webpack = require("webpack");
 
