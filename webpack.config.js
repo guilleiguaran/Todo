@@ -21,6 +21,8 @@ const css_output_template = prod ? "[name]-[chunkhash].css" : "[name].css";
 const js_output_template = prod ? "[name]-[chunkhash].js" : "[name].js";
 const asset_output_template = prod ? "[name]-[hash].[ext]" : "[name].[ext]";
 
+const outputFolder = prod ? "/public/assets" : "/tmp/webpack/assets";
+
 const asset_folders = ["./app/assets", "./lib/assets", "./vendor/assets", "./node_modules"];
 
 module.exports = {
@@ -30,10 +32,12 @@ module.exports = {
   },
 
   output: {
-    path: __dirname + "/public/assets",
+    path: __dirname + outputFolder,
     publicPath: "/assets/",
     filename: js_output_template
   },
+
+  watch: true,
 
   devServer: {
     proxy: {
