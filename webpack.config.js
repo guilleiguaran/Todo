@@ -9,6 +9,7 @@ if(process.argv[1].indexOf("webpack-dev-server") > -1) {
 
 const fs = require('fs');
 const webpack = require("webpack");
+const path = require("path");
 
 // Plugins
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -83,6 +84,12 @@ module.exports = {
     ]
   },
 
+  resolve: {
+    extensions: [
+      '', '.js', '.json', '.scss', '.css', '.coffee',
+    ],
+    packageMains: ["style", "main"]
+  },
   plugins: [
     new ExtractTextPlugin(css_output_template),
     new ManifestPlugin()
