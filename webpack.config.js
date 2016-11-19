@@ -19,7 +19,9 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const prod = process.argv.indexOf('-p') !== -1;
 const css_output_template = prod ? "[name]-[chunkhash].css" : "[name].css";
 const js_output_template = prod ? "[name]-[chunkhash].js" : "[name].js";
-const asset_output_template = prod ? "[name]-[hash].[ext]" : "[name].[ext]"
+const asset_output_template = prod ? "[name]-[hash].[ext]" : "[name].[ext]";
+
+const asset_folders = ["./app/assets", "./lib/assets", "./vendor/assets", "./node_modules"];
 
 module.exports = {
   context: __dirname + "/app/assets",
@@ -88,6 +90,7 @@ module.exports = {
     extensions: [
       '', '.js', '.json', '.scss', '.css', '.coffee',
     ],
+    root: asset_folders.map(x => path.resolve(x)),
     packageMains: ["style", "main"]
   },
   plugins: [
