@@ -52,9 +52,9 @@ module.exports = {
     loaders: [
       // JS + Babel
       {
-        test: /\.js(.erb)?$/,
+        test: /\.(js|es6)(.erb)?$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['es2015']
         }
