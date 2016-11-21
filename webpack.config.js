@@ -15,6 +15,7 @@ const product = require("cartesian");
 // Plugins
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
+const StatusPlugin = require('./node_lib/webpack-status-plugin');
 
 // Fingerprint only in production to improve performance
 const prod = process.argv.indexOf('-p') !== -1;
@@ -106,6 +107,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin(css_output_template),
-    new ManifestPlugin()
+    new ManifestPlugin(),
+    StatusPlugin,
   ]
 };
