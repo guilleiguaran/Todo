@@ -10,6 +10,7 @@ if(process.argv[1].indexOf("webpack-dev-server") > -1) {
 const fs = require('fs');
 const webpack = require("webpack");
 const path = require("path");
+const product = require("cartesian");
 
 // Plugins
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -23,7 +24,13 @@ const asset_output_template = prod ? "[name]-[hash].[ext]" : "[name].[ext]";
 
 const outputFolder = prod ? "/public/assets" : "/tmp/webpack/assets";
 
-const asset_folders = ["./app/assets", "./lib/assets", "./vendor/assets", "./node_modules"];
+const asset_folders = ["./app/assets", "./lib/assets", "./vendor/assets"];
+const asset_subfolders = ["/javascripts", "/stylesheets", "/lol"];
+
+const asset_paths = product([asset_folders, asset_subfolders])
+  .map(x => path.resolve(x[0] + x[1]))
+  .filter(p => fs.existsSync(p))
+  .concat([path.resolve('node_modules')]);
 
 module.exports = {
   context: __dirname + "/app/assets",
@@ -94,7 +101,7 @@ module.exports = {
     extensions: [
       '', '.js', '.json', '.scss', '.css', '.coffee',
     ],
-    root: asset_folders.map(x => path.resolve(x)),
+    root: asset_paths,
     packageMains: ["style", "main"]
   },
   plugins: [
