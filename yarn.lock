@@ -2429,9 +2429,9 @@ querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-rails-erb-loader@guilleiguaran/rails-erb-loader#erubis:
-  version "2.0.0"
-  resolved "https://codeload.github.com/guilleiguaran/rails-erb-loader/tar.gz/4fcf0e7bb5872639479ed159f06325c806625c9a"
+rails-erb-loader@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/rails-erb-loader/-/rails-erb-loader-3.0.0.tgz#167c0bc6647e6ddd8ff7fc1bc280ff2b1c500454"
   dependencies:
     loader-utils "^0.2.16"
     lodash.defaults "^4.2.0"

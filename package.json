@@ -7,6 +7,7 @@
     "angular-route": "^1.5.8",
     "jquery": "~3.1.0",
     "jquery-ujs": "~1.2.2",
+    "rails-erb-loader": "^3.0.0",
     "todomvc-app-css": "^1.0.1",
     "turbolinks": "^5.0.0"
   },
@@ -22,7 +23,6 @@
     "file-loader": "^0.9.0",
     "manifest-revision-webpack-plugin": "^0.3.0",
     "node-sass": "^3.13.0",
-    "rails-erb-loader": "guilleiguaran/rails-erb-loader#erubis",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
