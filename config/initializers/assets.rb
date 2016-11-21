@@ -27,9 +27,28 @@ ActiveSupport.on_load(:action_view) do
   include WebpackAssetUrlHelper
 end
 
-Rails.application.config.middleware.insert_after Rack::Sendfile, ActionDispatch::Static, File.join(Rails.root, "tmp", "webpack")
+webpack_tmp_path = File.join(Rails.root, "tmp", "webpack")
 
+Rails.application.config.middleware.insert_after Rack::Sendfile, ActionDispatch::Static, webpack_tmp_path
+
+ChildProcess.posix_spawn = true
 process = ChildProcess.build("webpack")
+
+semaphore = Concurrent::Semaphore.new(1)
 
 process.io.inherit!
 process.start
+
+webpack_reloader = Listen.to(webpack_tmp_path, only: /restart\.txt/) do
+  semaphore.acquire
+  puts "Restarting Webpack..."
+  begin
+    process.poll_for_exit(5)
+  rescue ChildProcess::TimeoutError
+    process.stop
+  end
+  process.start
+  semaphore.release
+end
+
+webpack_reloader.start
