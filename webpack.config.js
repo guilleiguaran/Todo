@@ -45,7 +45,7 @@ module.exports = {
     filename: js_output_template
   },
 
-  watch: true,
+  watch: !prod,
 
   devServer: {
     proxy: {
